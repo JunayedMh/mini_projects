@@ -23,7 +23,7 @@ def find_author(author):
     return None
         
 while True:
-    print("\n1.View 2.Borrow 3.Return 4.Author Search 5.Exit")
+    print("\n1.View 2.Borrow 3.Return 4.Search 5.Exit")
     print()
     choice = input("Select option: ")
 
