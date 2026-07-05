@@ -60,24 +60,45 @@ while True:
             print("Thanks for returning the book.")
 
     elif choice == "4":
-        b = find_author(input("Search by author: "))
-        if b:
-            print(f"{b["author"]} titles: {b["title"]:<5}, {b["year"]}")
-            brw = find_book(input("Which book you want to borrow?: "))
-            if not brw:
-                print("Not available.")
-            elif brw["available"] == True:
-                print(f"{brw["title"]} is available to borrow.")
-                choice1 = input("Do you want to borrow? Yes/No: ").capitalize()
-                if choice1 == "Yes":
-                    brw["available"] = False
-                    print("Borrowed successful.")
+        opt = input("Search by (author/title): ").lower()
+        if opt == "author":
+            srch = find_author(input("Search by author: "))
+            if srch:
+                author_match = []
+                for book in books:
+                    if book["author"].lower() == srch["author"].lower():
+                        author_match.append(book)
+                for book in author_match:
+                    print(f"- {book['title']} ({book['year']})")
+                brw = find_book(input("Which book you want to borrow?: "))
+                if not brw:
+                    print("Not available.")
+                elif brw["available"] == True:
+                    print(f"{brw["title"]} is available to borrow.")
+                    choice1 = input("Want to borrow?(yes/no): ").lower()
+                    if choice1 == "yes":
+                        brw["available"] = False
+                        print(f"{brw['title']} borrowed successfully.")
+                    else:
+                        print("Book is not available.")
                 else:
-                    print("Thanks for visisng the library.")
+                    print(f"Sorry, {brw['title']} is currently already borrowed.")
             else:
-                print("Book is not available to borrow.")
+                print("Author was not found.")
+        elif opt == "title":
+            srch1 = find_book(input("Search by title: "))
+            if srch1:
+                print(f"{srch1['title']} is available.")
+                choice1 = input("Want to borrow?(yes/no): ").lower()
+                if choice1 == "yes":
+                    srch1["available"] = False
+                    print(f"{srch1['title']} borrowed successfully.")
+                else:
+                        print("Book is not available.")
+            else:
+                print("This book is not available.")
         else:
-            print("Not available.")
+            print("Please type author/title")
 
     elif choice == "5":
         break
