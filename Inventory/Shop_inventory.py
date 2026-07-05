@@ -21,7 +21,12 @@ while True:
         product_name = input("Search name :").lower()
         found = [p for p in inventory if product_name in p[1].lower()]
         if found:
-            print(f" {p[0]} | {p[1]} | ${p[2]:.2f} | Qty:{p[3]}")
+            for p in found:
+                print(f"{p[0]} | {p[1]} | ${p[2]:.2f} | Qty:{p[3]}")
+                if p[3] < 5:
+                        print(f"{p[1]} has low stock")
+                else:
+                        print(f"{p[1]} well stock.")
         else:
             print(f"{product_name} was not found.")
 
