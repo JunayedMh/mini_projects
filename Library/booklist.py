@@ -28,9 +28,10 @@ while True:
     choice = input("Select option: ")
 
     if choice == "1":
-        print("\nBook name             Author               year      Available")
+        print("\nBook name             Availablity")
         for book in books:
-            print(f"{book["title"]:<20}: {book["author"]:<20} {book["year"]:<10} {book["available"]}")
+            status = "available" if book["available"] else "Not available"
+            print(f"{book['title']:<20}: {status:<20}")
     
     elif choice == "2":
         borrow = find_book(input("Search by title: "))
