@@ -9,9 +9,7 @@ class WordAnalyzer:
         pun = ".,!?;:'\"-()[]{}/"
         for word in self.text.lower().split():
             clean = word.strip(pun)
-            if clean not in self.word_count:
-                self.word_count[clean] = 0
-            self.word_count[clean] += 1
+            self.word_count[clean] = self.word_count.get(clean, 0) +1
     def top_words(self, n=5):
         sorted_words = []
 
